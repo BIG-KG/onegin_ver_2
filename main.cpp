@@ -7,9 +7,12 @@
 
 enum{
      MAX_LEN_OF_STRING = 50,
-     MAX_NUM_OF_STRINGS = 30,
-     STEP_ADDING_STRING = 10,
+     MAX_NUM_OF_STRINGS = 3,
+     STEP_ADDING_STRING = 5,
 };
+void print_all_strings(char **dinamic_mass_strings, int num_of_strings);
+
+
 
 void replace_str(char *str1, char *str2){
     char buffer[MAX_LEN_OF_STRING] = {};
@@ -31,8 +34,9 @@ void print_all_strings(char **dinamic_mass_strings, int num_of_strings){
     }
 }
 
-int enter_text(char **dinamic_mass_strings, FILE *inputfile, int max_number_of_strings){
+int enter_text(char *** P_dinamic_mass_strings, FILE *inputfile, int max_number_of_strings){
 
+    char **dinamic_mass_strings = *P_dinamic_mass_strings;
     assert(dinamic_mass_strings);
     assert(inputfile);
 
@@ -49,13 +53,14 @@ int enter_text(char **dinamic_mass_strings, FILE *inputfile, int max_number_of_s
 
         if (current_string >= max_number_of_strings){
 
-            dinamic_mass_strings = (char**)realloc( dinamic_mass_strings,
+            *P_dinamic_mass_strings = (char**)realloc( dinamic_mass_strings,
                                                     sizeof(char*) * (max_number_of_strings + STEP_ADDING_STRING));
+            dinamic_mass_strings = *P_dinamic_mass_strings;
             assert(dinamic_mass_strings);
             max_number_of_strings += STEP_ADDING_STRING;
         }
     }
-    printf("\n\npppp");
+
     return --current_string;
 
 }
@@ -135,7 +140,8 @@ int main(){
     char **dinamic_mass_strings = (char**)calloc(sizeof(char*), max_number_of_strings);
 
     FILE *inputFile = fopen("input.txt", "r");
-    int num_of_strings = enter_text(dinamic_mass_strings, inputFile, max_number_of_strings) + 1;
+
+    int num_of_strings = enter_text(&dinamic_mass_strings, inputFile, max_number_of_strings) + 1;
 
 
     sort_strings_bubble(dinamic_mass_strings, num_of_strings);
