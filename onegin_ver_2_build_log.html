@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>onegin_ver_2 build log</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+<tt>
+Build started on: <u>12-09-2024 at 02:46.11</u><br />
+Build ended on: <u>12-09-2024 at 02:46.13</u><p />
+<b>-------------- Build: Debug in onegin_ver_2 (compiler: NOT FOR PROJECTS! = MinGW GCC + Strict + Fast + Save (Requires Git))---------------</b><br />
+g++git-auto.bat "C:\MIPT\onegin_ver_2\main.cpp" -o bin\Debug\onegin_ver_2.exe  -Wall -fexceptions  -g  -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wfloat-equal -Wformat-security -Wformat=2 -Wignored-qualifiers -Winit-self -Winline -Wlogical-op -Wmain -Wmissing-declarations -Wno-missing-field-initializers -Wmissing-include-dirs -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wredundant-decls -Wshadow -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wswitch-default -Wswitch-enum -Wtype-limits -Wundef -Wunreachable-code -Wwrite-strings -fexceptions -g -pipe -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC<br />
+------------------------------------------------------------------------------------------------------<br />
+Compilation ERRORS:<br />
+<br />
+C:\MIPT\onegin_ver_2\main.cpp: In function 'void replace_str(char*, char*)':<br />
+<font color="#0000ff">C:\MIPT\onegin_ver_2\main.cpp:16:6: warning: no previous declaration for 'void replace_str(char*, char*)' [-Wmissing-declarations]</font><br />
+ void replace_str(char *str1, char *str2){<br />
+      ^<br />
+C:\MIPT\onegin_ver_2\main.cpp: In function 'void myswap(char**, int, int)':<br />
+<font color="#0000ff">C:\MIPT\onegin_ver_2\main.cpp:23:6: warning: no previous declaration for 'void myswap(char**, int, int)' [-Wmissing-declarations]</font><br />
+ void myswap(char **dinamic_mass, int el1, int el2){<br />
+      ^<br />
+C:\MIPT\onegin_ver_2\main.cpp: In function 'int enter_text(char***, FILE*, int)':<br />
+<font color="#0000ff">C:\MIPT\onegin_ver_2\main.cpp:36:5: warning: no previous declaration for 'int enter_text(char***, FILE*, int)' [-Wmissing-declarations]</font><br />
+ int enter_text(char *** P_dinamic_mass_strings, FILE *inputfile, int max_number_of_strings){<br />
+     ^<br />
+C:\MIPT\onegin_ver_2\main.cpp: In function 'int compare_strings(char*, char*)':<br />
+<font color="#0000ff">C:\MIPT\onegin_ver_2\main.cpp:67:5: warning: no previous declaration for 'int compare_strings(char*, char*)' [-Wmissing-declarations]</font><br />
+ int compare_strings(char *first_str, char *second_str){<br />
+     ^<br />
+C:\MIPT\onegin_ver_2\main.cpp: In function 'void sort_strings_bubble(char**, int)':<br />
+<font color="#0000ff">C:\MIPT\onegin_ver_2\main.cpp:122:6: warning: no previous declaration for 'void sort_strings_bubble(char**, int)' [-Wmissing-declarations]</font><br />
+ void sort_strings_bubble(char **dinamic_mass_strings, int num_of_strings){<br />
+      ^<br />
+C:\MIPT\onegin_ver_2\main.cpp: In function 'int main()':<br />
+<font color="#0000ff">C:\MIPT\onegin_ver_2\main.cpp:135:10: warning: unused variable 'mass_strings' [-Wunused-variable]</font><br />
+     char mass_strings[MAX_NUM_OF_STRINGS][MAX_LEN_OF_STRING] = {};<br />
+          ^<br />
+<font color="#0000ff">C:\MIPT\onegin_ver_2\main.cpp:136:10: warning: unused variable 'file_name' [-Wunused-variable]</font><br />
+     char file_name[50] = {};<br />
+          ^<br />
+------------------------------------------------------------------------------------------------------<br />
+Autosaving to the Git repository in C:/MIPT/onegin_ver_2/.git-auto/... <br />
+Output size is 35,20 KB<br />
+<font color="#0000ff">Process terminated with status 0 (0 minutes, 2 seconds)</font><br />
+<font color="#0000ff">0 errors, 7 warnings (0 minutes, 2 seconds)</font><br />
+</tt>
+</body>
+</html>
