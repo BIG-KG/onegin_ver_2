@@ -13,14 +13,17 @@ const int STEP_ADDING_STRING = 5;
 
 void print_all_strings(char **dinamic_mass_strings, int num_of_strings);
 
-void replace_str(char *str1, char *str2);
-
 void myswap(char **dinamic_mass, int el1, int el2);
 
 int enter_text(char *** P_dinamic_mass_strings, FILE *inputfile, int maxNumberStrings);
 
-int compare_strings(char *first_str, char *second_str);
+void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporator)(void*, void* ));
 
-void sort_strings_bubble(char **dinamic_mass_strings, int num_of_strings);
+int compare_strings(void *vfirstStr, void *vsecondStr);
+
+void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*comporator)(void*, void* ));
+	
+void swapn(void* El1, void* El2, const int numOfBites);
+
 
 #endif // HEADER_H_INCLUDED

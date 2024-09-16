@@ -11,8 +11,10 @@ int main(){
 
     int numStrings = enter_text(&stringsArray, inputFile, maxNumberStrings) + 1;
 
-    sort_strings_bubble(stringsArray, numStrings);
-
+    //sort_strings_bubble(stringsArray, numStrings);
+	
+	quick_sort(stringsArray, numStrings, sizeof(char *), compare_strings);
+	
     print_all_strings(stringsArray, numStrings);
 
     fclose(inputFile);
