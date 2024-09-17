@@ -6,6 +6,10 @@ const int START_ARRAY_SIZE = 5;
 const int STEP_ARRAY = 2;
 
 int int_cmp(void *num1, void *num2){
+	
+	assert(num1);
+	assert(num2);
+	
     for(int i = 0; i < sizeof(int); i ++){
         if(*((char *)num1 + i) - *((char *)num2 + i)){
             return ((int)(*((char *)num1 + i) - *((char *)num2 + i)));
@@ -20,6 +24,10 @@ struct start_end_arr{
 };
 
 void swapn(void* El1, void* El2, const int numOfBites){
+	
+	assert(El1);
+	assert(El2);
+	
     char buffer[numOfBites];
     memset(buffer, 0, numOfBites);
 
@@ -29,6 +37,10 @@ void swapn(void* El1, void* El2, const int numOfBites){
 }
 
 void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*comporator)(void*, void* )){
+	
+	assert(varrayStart);
+	assert(varrayEnd);
+	assert(comporator != 0);
 
 	const int cDataSize = dataSize;
 	char* arrayStart = (char*)varrayStart;
@@ -57,7 +69,6 @@ void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*compo
                 if(comporator(arrayStart + (rightEl * dataSize), Etlon) >= 0){
                     break;
                 }
-
                 else {
                     rightEl++;
                     break;
@@ -72,6 +83,9 @@ void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*compo
 
 
 int compare_strings(void *vfirstStr, void *vsecondStr){
+	
+	assert(vfirstStr);
+	assert(vsecondStr);
 
     char *firstStr = *((char**)vfirstStr);
     char *secondStr = *((char**)vsecondStr);
@@ -119,9 +133,11 @@ int compare_strings(void *vfirstStr, void *vsecondStr){
             return 0;
         }
     }
+	
     if (firstStr[currSimbStr1] == '\0'){
         return -1;
     }
+	
     if (secondStr[currSimbStr2]  == '\0'){
         return 1;
     }
@@ -131,6 +147,9 @@ int compare_strings(void *vfirstStr, void *vsecondStr){
 
 
 void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporator)(void*, void* )){
+	
+	assert(vArrayStart);
+	assert(comporator != 0);
 
     start_end_arr *StEndPointers = (start_end_arr *)calloc(sizeof(start_end_arr), START_ARRAY_SIZE);
     StEndPointers[0].startch = vArrayStart;
@@ -142,14 +161,7 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
     char *middleEl = NULL;
     char **start =(char **)vArrayStart;
 
-
     do{
-       // printf("test1");
-        for(int i = 0; i < 3; i++){
-           // printf("%s\n", start[i]);
-        }
-        //printf("\n\n");
-
         currElSize = ((char *)StEndPointers[currEl].endch - (char *)StEndPointers[currEl].startch) / dataSize;
         if (currElSize == 2){
             if( comporator((char *)StEndPointers[currEl].endch - dataSize, (char *)StEndPointers[currEl].startch) < 0 ){
@@ -157,8 +169,6 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
             }
         }
         else{
-
-
             middleEl = (char *)more_less(StEndPointers[currEl].startch, StEndPointers[currEl].endch, dataSize, comporator);
 
             if( ((char *)StEndPointers[currEl].endch - middleEl) >= (2 * dataSize)){
@@ -174,7 +184,7 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
             }
         }
         currEl ++;
-
+		
         if(numOfEl + 2 >= arraySize){
             arraySize *= STEP_ARRAY;
             StEndPointers = (start_end_arr *)realloc(StEndPointers, sizeof(start_end_arr) * arraySize);

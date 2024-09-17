@@ -1,17 +1,19 @@
 #include "header.h"
 
-int enter_text(char *** pointToStringArr, FILE *inputfile, int maxNumbStrings){
-
-    char **stringsArray = *pointToStringArr;
+int enter_text(char *** pointToStringArr, 	int inputfile){
+	
     assert(stringsArray);
-    assert(inputfile);
+    
+    char **stringsArray = *pointToStringArr;
+    int num_ofString = 0;
+	file_size = 0;
+	
+	lseek(inputfile, 0, SEEK_END);
+    printf("%l", tell(lseek));
+	
+    while( (fscanf(inputfile, "%[^\n]%*[\n]", buffer_string)) > 0){
 
-    int currString = 0;
-    char buffer_string[MAX_LEN_OF_STRING] = {};
-    int a;
-    while((a = fscanf(inputfile, "%[^\n]%*[\n]", buffer_string)) > 0){
-
-        stringsArray[currString] = (char*)calloc(sizeof(char), 60);
+        stringsArray[currString] = (char*)calloc(sizeof(char), strlen(buffer_string));
 
         strcpy(stringsArray[currString], buffer_string);
 
@@ -31,6 +33,9 @@ int enter_text(char *** pointToStringArr, FILE *inputfile, int maxNumbStrings){
 }
 
 void print_all_strings(char **stringsArray, int numStrings){
+	
+	assert(stringsArray);
+	
     for(int i = 0; i < numStrings; i ++){
         printf("%s\n", stringsArray[i]);
         free(stringsArray[i]);

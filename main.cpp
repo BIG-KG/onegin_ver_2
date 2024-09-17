@@ -1,15 +1,13 @@
 #include "header.h"
 
 int main(){
-    char mass_strings[MAX_NUM_OF_STRINGS][MAX_LEN_OF_STRING] = {};
     char file_name[50] = {};
-    int maxNumberStrings = MAX_NUM_OF_STRINGS;
 
-    char **stringsArray = (char**)calloc(sizeof(char*), maxNumberStrings);
+    char **stringsArray = NULL;
 
-    FILE *inputFile = fopen("input.txt", "r");
+    int in_file = open("input.txt", O_TRUNC );
 
-    int numStrings = enter_text(&stringsArray, inputFile, maxNumberStrings) + 1;
+    int numStrings = enter_text(&stringsArray, in_file) + 1;
 
     //sort_strings_bubble(stringsArray, numStrings);
 	
