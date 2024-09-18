@@ -46,6 +46,8 @@ void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*compo
     //printf("\n data size = %d", ((arrayEnd - arrayStart)));
 
 	int numbetlon = rand() % ((arrayEnd - arrayStart)/dataSize);
+    printf("\nmore_less_start2");
+
 
 	char Etlon[cDataSize];
     //printf("\nmore_less_start2.5");
@@ -167,11 +169,7 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
     char **start =(char **)vArrayStart;
     //printf("t2\n");
     do{
-
-        for(int i = 0; i <numElem; i++){
-            printf("%s\n", ((string_start_end *)vArrayStart)[i].startl);
-        }
-
+        printf("\n\npppp1");
         currElSize = ((char *)StEndPointers[currEl].endch - (char *)StEndPointers[currEl].startch) / dataSize;
         if (currElSize == 2){
             if( comporator((char *)StEndPointers[currEl].endch - dataSize, (char *)StEndPointers[currEl].startch) < 0 ){
@@ -180,10 +178,9 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
         }
         else{
         //{
-            printf("\n2.45");
+            //printf("2.45");
             middleEl = (char *)more_less(StEndPointers[currEl].startch, StEndPointers[currEl].endch, dataSize, comporator);
-
-            printf("  midle el= %d\n", ((char *)StEndPointers[0].endch - middleEl) / dataSize);
+            printf("pppp2.5");
             if( ((char *)StEndPointers[currEl].endch - middleEl) >= (2 * dataSize)){
                 StEndPointers[numOfEl].endch = StEndPointers[currEl].endch;
                 StEndPointers[numOfEl].startch = middleEl;
