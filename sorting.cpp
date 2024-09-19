@@ -293,3 +293,79 @@ int struct_compare_strings(void *vfirstStr, void *vsecondStr){
     //printf("777\n");
     return 0;
 }
+
+int struct_compare_strings_rev(void *vfirstStr, void *vsecondStr){
+
+	assert(vfirstStr);
+	assert(vsecondStr);
+
+    char *firstStr  = ( ((string_start_end *)vfirstStr )->endl);
+    char *secondStr = ( ((string_start_end *)vsecondStr)->endl);
+    assert(firstStr);
+    assert(secondStr);
+
+    int currSimbStr1 = 0;
+    int currSimbStr2 = 0;
+
+    int toOneReg1 = 0;
+    int toOneReg2 = 0;
+
+    while(firstStr[currSimbStr1] != '\0' && secondStr[currSimbStr2] != '\0'){
+        if( not(isalpha(firstStr[currSimbStr1]) )){
+            if( not(isalpha(secondStr[currSimbStr2]))){
+                currSimbStr2--;
+            }
+            currSimbStr1--;
+            continue;
+        }
+        if( not(isalpha(secondStr[currSimbStr2]))){
+            currSimbStr2--;
+            continue;
+        }
+
+        toOneReg1 = tolower(firstStr[currSimbStr1]);
+        toOneReg2 = tolower(secondStr[currSimbStr2]);
+
+        if(toOneReg1 < toOneReg2){//���� ����� ������
+            //printf("000\n");
+            return -1;
+        }
+        else if(toOneReg1 > toOneReg2){
+            //printf("111\n");
+            return 1;
+        }
+        currSimbStr1 --;
+        currSimbStr2 --;
+
+    }
+
+    //printf("\nstr1 _%s_ str2 _%s_, num1 = %d, num2 = %d\n",
+                      //  firstStr, secondStr, currSimbStr1, currSimbStr2);
+
+    if(firstStr[currSimbStr1] == '\0' && secondStr[currSimbStr2] == '\0'){
+        if (currSimbStr1 > currSimbStr2){
+           // printf("222\n");
+            return -1;
+        }
+        if (currSimbStr1 < currSimbStr2){
+            //printf("333\n");
+            return 1;
+        }
+        else{
+            //printf("444\n");
+            return 0;
+        }
+    }
+
+    if (firstStr[currSimbStr1] == '\0'){
+        //printf("555\n");
+        return -1;
+    }
+
+    if (secondStr[currSimbStr2]  == '\0'){
+        //printf("666\n");
+        return 1;
+    }
+    //printf("777\n");
+    return 0;
+}

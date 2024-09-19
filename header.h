@@ -40,6 +40,9 @@ void swapn(void* El1, void* El2, const int numOfBites);
 int enter_text_struct(string_start_end ** pointToStringArr, int inputfile, char ** start);
 
 int struct_compare_strings(void *vfirstStr, void *vsecondStr);
+
+int struct_compare_strings_rev(void *vfirstStr, void *vsecondtr);
+
 void print_struct_strings(string_start_end *string_struct, int numStrings);
 
 
