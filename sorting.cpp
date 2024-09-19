@@ -83,6 +83,10 @@ void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*compo
                     break;
                 }
             }
+            else if(comporator(arrayStart + (rightEl * dataSize), Etlon) == 0){
+                rightEl++;
+                break;
+            }
         }
         swapn(arrayStart + (leftEl * dataSize),
               arrayStart + (rightEl * dataSize), dataSize);
@@ -120,9 +124,11 @@ int compare_strings(void *vfirstStr, void *vsecondStr){
         toOneReg2 = tolower(secondStr[currSimbStr2]);
 
         if(toOneReg1 < toOneReg2){
+            printf("111");
             return -1;
         }
         else if(toOneReg1 > toOneReg2){
+            printf("222");
             return 1;
         }
         currSimbStr1 ++;
@@ -132,23 +138,29 @@ int compare_strings(void *vfirstStr, void *vsecondStr){
 
     if(firstStr[currSimbStr1] == '\0' && secondStr[currSimbStr2] == '\0'){
         if (currSimbStr1 < currSimbStr2){
+            //printf("333");
             return -1;
         }
-        if (currSimbStr1 < currSimbStr2){
+        if (currSimbStr1 > currSimbStr2){
+            //printf("444");
             return 1;
         }
         else{
+            //printf("555");
             return 0;
         }
     }
 
     if (firstStr[currSimbStr1] == '\0'){
+        //printf("666");
         return -1;
     }
 
     if (secondStr[currSimbStr2]  == '\0'){
+        //printf("777");
         return 1;
     }
+    printf("888");
     return 0;
 }
 
@@ -166,6 +178,9 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
     char *middleEl = NULL;
     char **start =(char **)vArrayStart;
     do{
+        for(int i = 0; i <4; i ++){
+            //printf("%s\n", ((start_end_arr*)vArrayStart)[i].startch );
+        }
 
         currElSize = ((char *)StEndPointers[currEl].endch - (char *)StEndPointers[currEl].startch) / dataSize;
         if (currElSize == 2){
@@ -175,6 +190,7 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
         }
         else{
             middleEl = (char *)more_less(StEndPointers[currEl].startch, StEndPointers[currEl].endch, dataSize, comporator);
+            //printf("middle = %d\n", (middleEl - (char *)StEndPointers[0].startch)/dataSize );
 
             if( ((char *)StEndPointers[currEl].endch - middleEl) >= (2 * dataSize)){
                 StEndPointers[numOfEl].endch = StEndPointers[currEl].endch;
@@ -216,8 +232,13 @@ int struct_compare_strings(void *vfirstStr, void *vsecondStr){
     int toOneReg1 = 0;
     int toOneReg2 = 0;
 
+
+
     while(firstStr[currSimbStr1] != '\0' && secondStr[currSimbStr2] != '\0'){
         if( not(isalpha(firstStr[currSimbStr1]) )){
+            if( not(isalpha(secondStr[currSimbStr2]))){
+                currSimbStr2++;
+            }
             currSimbStr1++;
             continue;
         }
@@ -229,10 +250,12 @@ int struct_compare_strings(void *vfirstStr, void *vsecondStr){
         toOneReg1 = tolower(firstStr[currSimbStr1]);
         toOneReg2 = tolower(secondStr[currSimbStr2]);
 
-        if(toOneReg1 < toOneReg2){//один минус второй
+        if(toOneReg1 < toOneReg2){//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+            //printf("000\n");
             return -1;
         }
         else if(toOneReg1 > toOneReg2){
+            //printf("111\n");
             return 1;
         }
         currSimbStr1 ++;
@@ -240,25 +263,33 @@ int struct_compare_strings(void *vfirstStr, void *vsecondStr){
 
     }
 
+    //printf("\nstr1 _%s_ str2 _%s_, num1 = %d, num2 = %d\n",
+                      //  firstStr, secondStr, currSimbStr1, currSimbStr2);
+
     if(firstStr[currSimbStr1] == '\0' && secondStr[currSimbStr2] == '\0'){
         if (currSimbStr1 < currSimbStr2){
+           // printf("222\n");
             return -1;
         }
-        if (currSimbStr1 < currSimbStr2){
+        if (currSimbStr1 > currSimbStr2){
+            //printf("333\n");
             return 1;
         }
         else{
+            //printf("444\n");
             return 0;
         }
     }
 
     if (firstStr[currSimbStr1] == '\0'){
+        //printf("555\n");
         return -1;
     }
 
     if (secondStr[currSimbStr2]  == '\0'){
+        //printf("666\n");
         return 1;
     }
+    //printf("777\n");
     return 0;
 }
-
