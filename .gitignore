@@ -1,2 +1,10 @@
 
 onegin_ver_2.bmarks
+*.o
+*.layout
+*.save
+onegin_ver_2_build_log.html
+onegin_ver_2.layout
+*.save
+onegin_ver_2.bmarks
+onegin_ver_2.layout

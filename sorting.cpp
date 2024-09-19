@@ -34,41 +34,44 @@ void swapn(void* El1, void* El2, const int numOfBites){
 
 void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*comporator)(void*, void* )){
 
-    //printf("\nmore_less_start1");
 	assert(varrayStart);
 	assert(varrayEnd);
-	//assert(comporator != 0);
 
 	const int cDataSize = dataSize;
 	char* arrayStart = (char*)varrayStart;
 	char* arrayEnd = (char*)varrayEnd;
-    //printf("\nmore_less_start1.75");
-    //printf("\n data size = %d", ((arrayEnd - arrayStart)));
 
 	int numbetlon = rand() % ((arrayEnd - arrayStart)/dataSize);
-
 	char Etlon[cDataSize];
-    //printf("\nmore_less_start2.5");
 
 	memset(Etlon, 0, cDataSize);
-    //printf("\nmore_less_start3");
 
 	memcpy(Etlon, arrayStart + numbetlon * dataSize, dataSize);
-    //printf("\nmore_less_start4");
-	int leftEl = -1;
+	int leftEl = 0;
 	int rightEl = (arrayEnd - arrayStart) / (dataSize) - 1;
+	bool findLeft = 0;
+	bool findRight = 0;
     while(leftEl + 1 < rightEl && rightEl > 0){
 
+        findLeft = 0;
+        findRight = 0;
+        while(leftEl + 1 <= rightEl && (!findRight || !findLeft)){
+            if(comporator(arrayStart + (rightEl * dataSize), Etlon) >= 0){
+                rightEl -= 1;
+            }
+            else{
+                findRight = 1;
+            }
+            if(comporator(Etlon, arrayStart + (leftEl * dataSize)) > 0){
+                leftEl += 1;
+            }
+            else{
+                findLeft = 1;
+            }
 
 
-        while(comporator(arrayStart + (rightEl * dataSize), Etlon) >= 0 && leftEl + 1 < rightEl){
-            rightEl -= 1;
         }
 
-        leftEl++;
-        while(comporator(Etlon, arrayStart + (leftEl * dataSize)) > 0 && leftEl + 1 < rightEl){
-            leftEl += 1;
-        }
 
         if(leftEl + 1 >= rightEl){
             if( comporator(Etlon, arrayStart + (leftEl * dataSize)) > 0){
@@ -152,25 +155,17 @@ int compare_strings(void *vfirstStr, void *vsecondStr){
 void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporator)(void*, void* )){
 
 	assert(vArrayStart);
-	//assert(comporator != 0);
-
-    //printf("t1\n");
+	assert(comporator != 0);
     start_end_arr *StEndPointers = (start_end_arr *)calloc(sizeof(start_end_arr), START_ARRAY_SIZE);
     StEndPointers[0].startch = vArrayStart;
     StEndPointers[0].endch = (char *)vArrayStart + (numElem * dataSize);
-    //printf("\nnum*size = %d\n", numElem);
     int arraySize = START_ARRAY_SIZE;
     int numOfEl = 1;
     int currEl = 0;
     int currElSize = 0;
     char *middleEl = NULL;
     char **start =(char **)vArrayStart;
-    //printf("t2\n");
     do{
-
-        for(int i = 0; i <numElem; i++){
-            printf("%s\n", ((string_start_end *)vArrayStart)[i].startl);
-        }
 
         currElSize = ((char *)StEndPointers[currEl].endch - (char *)StEndPointers[currEl].startch) / dataSize;
         if (currElSize == 2){
@@ -179,11 +174,8 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
             }
         }
         else{
-        //{
-            printf("\n2.45");
             middleEl = (char *)more_less(StEndPointers[currEl].startch, StEndPointers[currEl].endch, dataSize, comporator);
 
-            printf("  midle el= %d\n", ((char *)StEndPointers[0].endch - middleEl) / dataSize);
             if( ((char *)StEndPointers[currEl].endch - middleEl) >= (2 * dataSize)){
                 StEndPointers[numOfEl].endch = StEndPointers[currEl].endch;
                 StEndPointers[numOfEl].startch = middleEl;
@@ -196,7 +188,6 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
                 numOfEl ++;
             }
         }
-        //printf("pppp3");
         currEl ++;
 
         if(numOfEl + 2 >= arraySize){
@@ -204,10 +195,8 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
             StEndPointers = (start_end_arr *)realloc(StEndPointers, sizeof(start_end_arr) * arraySize);
             assert(StEndPointers);
         }
-        //printf("pppp4");
 
     }while(numOfEl > currEl);
-    //printf("t3");
     free(StEndPointers);
 }
 
@@ -217,7 +206,7 @@ int struct_compare_strings(void *vfirstStr, void *vsecondStr){
 	assert(vsecondStr);
 
     char *firstStr = ( ((string_start_end *)vfirstStr)->startl);
-    char *secondStr = ( ((string_start_end *)vsecondStr)->endl);
+    char *secondStr = ( ((string_start_end *)vsecondStr)->startl);
     assert(firstStr);
     assert(secondStr);
 
@@ -240,7 +229,7 @@ int struct_compare_strings(void *vfirstStr, void *vsecondStr){
         toOneReg1 = tolower(firstStr[currSimbStr1]);
         toOneReg2 = tolower(secondStr[currSimbStr2]);
 
-        if(toOneReg1 < toOneReg2){
+        if(toOneReg1 < toOneReg2){//один минус второй
             return -1;
         }
         else if(toOneReg1 > toOneReg2){

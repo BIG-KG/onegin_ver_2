@@ -6,7 +6,7 @@ int main(){
     string_start_end *stringsArray = NULL;
     int in_file = open("input.txt", /*_O_BINARY |*/ O_RDONLY );
 
-    int numStrings = enter_text2(&stringsArray, in_file, &allStr);
+    int numStrings = enter_text_struct(&stringsArray, in_file, &allStr);
 
 
 
@@ -14,9 +14,6 @@ int main(){
     //sort_strings_bubble(stringsArray, numStrings);
     //printf("num_of_elem = %d\n", numStrings);
 	quick_sort(stringsArray, numStrings, sizeof(string_start_end), struct_compare_strings);
-    //qsort(stringsArray, numStrings, sizeof(string_start_end), struct_compare_strings);
-    //printf("u");
-    //print_all_strings(stringsArray, numStrings);
     print_struct_strings(stringsArray, numStrings);
     free(allStr);
     free(stringsArray);
