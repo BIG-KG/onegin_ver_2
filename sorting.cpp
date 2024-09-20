@@ -1,36 +1,7 @@
 #include "header.h"
 
-
-
 const int START_ARRAY_SIZE = 5;
 const int STEP_ARRAY = 2;
-
-int int_cmp (void *num1, void *num2){
-
-	assert (num1);
-	assert (num2);
-
-    for (int i = 0; i < sizeof(int); i ++){
-        if (*((char *)num1 + i) - *((char *)num2 + i)){
-            return ((int)(*((char *)num1 + i) - *((char *)num2 + i)));
-        }
-    }
-    return 0;
-}
-
-
-void swapn(void* El1, void* El2, const int numOfBites){
-
-	assert(El1);
-	assert(El2);
-
-    char buffer[numOfBites];
-    memset(buffer, 0, numOfBites);
-
-    memcpy(  buffer,    (char*)El1, numOfBites);
-    memcpy( (char*)El1, (char*)El2, numOfBites);
-    memcpy( (char*)El2,  buffer,    numOfBites);
-}
 
 void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*comporator)(void*, void* )){
 
@@ -98,6 +69,7 @@ void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*compo
     }
 
     return arrayStart + (rightEl) * dataSize;
+
 }
 
 void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporator)(void*, void* )){
@@ -126,11 +98,60 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
                                 ((char *)StEndPointers[currEl].startch         )   ) < 0 ){
                                                                                                 //как нормально оформить
                 swapn (  ((char *)StEndPointers[currEl].endch  - dataSize),
-                         ((char *)StEndPointers[currEl].startch          ),  dataSize  );
+                         ((char *)StEndPointers[currEl].startch          ),    dataSize);
             }
         }
 
+        else if(currElSize == 3){
 
+            if (comporator (   ((char *)StEndPointers[currEl].startch           ),
+                               ((char *)StEndPointers[currEl].startch + dataSize)   )   > 0 ){
+
+                if (comporator (   ((char *)StEndPointers[currEl].startch +dataSize),
+                                   ((char *)StEndPointers[currEl].endch - dataSize )   ) > 0){
+
+                    swapn (   ((char *)StEndPointers[currEl].startch         ),
+                              ((char *)StEndPointers[currEl].endch - dataSize),  dataSize);
+
+                }
+
+                else if (comporator (   ((char *)StEndPointers[currEl].startch),
+                                        ((char *)StEndPointers[currEl].endch - dataSize )   ) < 0){
+
+                    swapn (   ((char *)StEndPointers[currEl].startch           ),
+                              ((char *)StEndPointers[currEl].startch + dataSize),  dataSize);
+                }
+
+                else{
+                    swapn (   ((char *)StEndPointers[currEl].startch           ),
+                              ((char *)StEndPointers[currEl].startch + dataSize),  dataSize);
+
+                    swapn (   ((char *)StEndPointers[currEl].endch - dataSize  ),
+                              ((char *)StEndPointers[currEl].startch + dataSize),  dataSize);
+                }
+            }
+
+            else if (comporator (   ((char *)StEndPointers[currEl].endch   - dataSize),
+                                    ((char *)StEndPointers[currEl].startch + dataSize)   ) < 0){
+                printf("\nd\n");
+
+                if (comporator (   ((char *)StEndPointers[currEl].endch - dataSize),
+                                  ((char *)StEndPointers[currEl].startch         )   ) < 0){
+
+                    swapn (   ((char *)StEndPointers[currEl].startch           ),
+                              ((char *)StEndPointers[currEl].startch + dataSize),  dataSize);
+
+                    swapn (   ((char *)StEndPointers[currEl].endch - dataSize  ),
+                              ((char *)StEndPointers[currEl].startch           ),  dataSize);
+                }
+
+                else{
+                    swapn (   ((char *)StEndPointers[currEl].endch - dataSize  ),
+                              ((char *)StEndPointers[currEl].startch + dataSize),  dataSize);
+                }
+
+            }
+        }
         else{
             middleEl = (char *)more_less (  (StEndPointers[currEl].startch),
                                             (StEndPointers[currEl].endch  ), dataSize, comporator );
@@ -164,143 +185,3 @@ void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporato
 
 }
 
-int struct_compare_strings(void *vfirstStr, void *vsecondStr){
-
-	assert(vfirstStr );
-	assert(vsecondStr);
-
-    char *firstStr  = ( ((string_start_end *)vfirstStr ) ->startl);
-    char *secondStr = ( ((string_start_end *)vsecondStr) ->startl);
-
-    int currSimbStr1 = 0;
-    int currSimbStr2 = 0;
-    int toOneReg1    = 0;
-    int toOneReg2    = 0;
-
-
-
-    while(firstStr[currSimbStr1] != '\0' && secondStr[currSimbStr2] != '\0'){
-
-        if (  not(isalpha(firstStr[currSimbStr1]))  ){
-
-            if (  not(isalpha(secondStr[currSimbStr2]))  ){
-                currSimbStr2++;
-            }
-
-            currSimbStr1++;
-            continue;
-        }
-
-        if ( not(isalpha(secondStr[currSimbStr2])) ){
-            currSimbStr2++;
-            continue;
-        }
-
-        toOneReg1 = tolower(firstStr [currSimbStr1]);
-        toOneReg2 = tolower(secondStr[currSimbStr2]);
-
-        if     (toOneReg1 < toOneReg2){//���� ����� ������
-            return -1;
-        }
-
-        else if(toOneReg1 > toOneReg2){
-            return  1;
-        }
-
-        currSimbStr1 ++;
-        currSimbStr2 ++;
-
-    }
-
-    if (  (firstStr[currSimbStr1] == '\0')  &&  (secondStr[currSimbStr2] == '\0')  ){
-        if (currSimbStr1 < currSimbStr2){
-            return -1;
-        }
-        if (currSimbStr1 > currSimbStr2){
-            return 1;
-        }
-
-        else{
-            return 0;
-        }
-    }
-
-    if (firstStr [currSimbStr1]  == '\0'){
-        return -1;
-    }
-
-    if (secondStr[currSimbStr2]  == '\0'){
-        return 1;
-    }
-
-    return 0;
-
-}
-
-int struct_compare_strings_rev(void *vfirstStr, void *vsecondStr){
-
-	assert(vfirstStr);
-	assert(vsecondStr);
-
-    char *firstStr  = ( ((string_start_end *)vfirstStr )->endl);
-    char *secondStr = ( ((string_start_end *)vsecondStr)->endl);
-
-    int currSimbStr1 = 0;
-    int currSimbStr2 = 0;
-    int toOneReg1 = 0;
-    int toOneReg2 = 0;
-
-    while (  (firstStr[currSimbStr1] != '\0')  &&  (secondStr[currSimbStr2] != '\0')  ){
-
-        if ( not(isalpha(firstStr[currSimbStr1]) )){
-            if ( not(isalpha(secondStr[currSimbStr2]))){
-                currSimbStr2--;
-            }
-            currSimbStr1--;
-            continue;
-        }
-        if ( not(isalpha(secondStr[currSimbStr2]))){
-            currSimbStr2--;
-            continue;
-        }
-
-        toOneReg1 = tolower(firstStr[currSimbStr1]);
-        toOneReg2 = tolower(secondStr[currSimbStr2]);
-
-        if (toOneReg1 < toOneReg2){//���� ����� ������
-            return -1;
-        }
-        else if (toOneReg1 > toOneReg2){
-            return 1;
-        }
-
-        currSimbStr1 --;
-        currSimbStr2 --;
-
-    }
-
-    if (  (firstStr[currSimbStr1] == '\0')  &&  (secondStr[currSimbStr2] == '\0')  ){
-
-        if (currSimbStr1 > currSimbStr2){
-            return -1;
-        }
-
-        if (currSimbStr1 < currSimbStr2){
-            return  1;
-        }
-
-        else{
-            return  0;
-        }
-    }
-
-    if (firstStr [currSimbStr1] == '\0'){
-        return -1;
-    }
-
-    if (secondStr[currSimbStr2] == '\0'){
-        return 1;
-    }
-
-    return 0;
-}

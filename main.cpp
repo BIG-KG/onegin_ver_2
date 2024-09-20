@@ -9,7 +9,7 @@ int main(){
     printf("\n");
     int numStrings = enter_text_struct(&stringsArray, in_file, &allStr);
     print_struct_strings(stringsArray, numStrings);
-    printf("\n");
+    //printf("\n");
 	//quick_sort(stringsArray, numStrings, sizeof(string_start_end), struct_compare_strings);
 	quick_sort(stringsArray, numStrings, sizeof(string_start_end),
                struct_compare_strings);

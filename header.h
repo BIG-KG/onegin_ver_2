@@ -25,15 +25,11 @@ struct start_end_arr{
     void *endch = NULL;
 };
 
-void print_all_strings(char **dinamic_mass_strings, int num_of_strings);
+int file_size(int targetFile);
 
 void myswap(char **dinamic_mass, int el1, int el2);
 
-int enter_text(char *** P_dinamic_mass_strings, int inputfile);
-
 void quick_sort(void* vArrayStart, int numElem, size_t dataSize, int (*comporator)(void*, void* ));
-
-int compare_strings(void *vfirstStr, void *vsecondStr);
 
 void* more_less(void* varrayStart, void* varrayEnd, size_t dataSize, int (*comporator)(void*, void* ));
 
