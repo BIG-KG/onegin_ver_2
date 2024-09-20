@@ -8,6 +8,8 @@
 #include <ctype.h>
 #include <string.h>
 #include <fcntl.h>
+#include <time.h>
+
 
 const int MAX_LEN_OF_STRING = 60;
 const int MAX_NUM_OF_STRINGS = 3;

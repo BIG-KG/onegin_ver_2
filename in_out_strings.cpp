@@ -26,7 +26,7 @@ int enter_text_struct(string_start_end ** pointToStringArr, int inputfile, char 
             currElement++;
         }
 
-        if(currElement >= file_size){
+        if(currElement > file_size){
             break;
         }
 
@@ -41,7 +41,7 @@ int enter_text_struct(string_start_end ** pointToStringArr, int inputfile, char 
         currElement ++;
 
         numstring ++;
-        if (numstring >= maxNumbStrings){
+        if (numstring > maxNumbStrings){
             stringsArray = (string_start_end *)realloc(stringsArray,
                                 sizeof(string_start_end) * maxNumbStrings * STEP_ADDING_STRING);
 
